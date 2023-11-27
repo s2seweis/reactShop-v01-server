@@ -1,5 +1,5 @@
-// server.js
 const express = require('express');
+const cors = require('cors'); // Import the cors middleware
 const app = express();
 const { resolve } = require('path');
 const env = require('dotenv').config({ path: './.env' });
@@ -9,6 +9,9 @@ const firebaseService = require('./services/firebaseService');
 // Initialize Firebase
 app.use(express.static(process.env.STATIC_DIR));
 app.use(express.json());
+
+// Enable CORS for all routes
+app.use(cors());
 
 app.get('/', (req, res) => {
   const path = resolve(process.env.STATIC_DIR + '/index.html');
